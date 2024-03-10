@@ -9,7 +9,9 @@
       <h1>Find out if your classmate is a vampire or not!</h1>
 
       <div class="buttons">
+        <!-- Modified the button with an ID for easier access -->
         <button
+          id="startButton"
           style="border: 5px solid black; padding: 10px 20px; font-size: 16px"
         >
           Start Here!
@@ -58,5 +60,13 @@
         </ul>
       </div>
     </div>
+
+    <script>
+      document
+        .getElementById("startButton")
+        .addEventListener("click", function () {
+          window.location.href = "vampireinput.html";
+        });
+    </script>
   </body>
 </html>

@@ -7,50 +7,50 @@
       input[type="number"],
       input[type="text"] {
         font-size: 16px;
-        width: 300px; /* Adjust the width as needed */
+        width: 300px;
       }
     </style>
     <script>
-      function saveVampireInputs() {
-        var name = document.getElementById("name").value;
-        var shadow = document.getElementById("shadow").value;
-        var garlic = document.getElementById("garlic").value;
-        var pale = document.getElementById("pale").value;
-        var accent = document.getElementById("accent").value;
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelector("form")
+          .addEventListener("submit", function (event) {
+            var name = document.getElementById("name").value;
+            var shadow = document.getElementById("shadow").value;
+            var garlic = document.getElementById("garlic").value;
+            var pale = document.getElementById("pale").value;
+            var accent = document.getElementById("accent").value;
 
-        // Validate form fields
-        if (!name || !shadow || !garlic || !pale || !accent) {
-          alert("Please fill out all fields.");
-          return;
-        }
+            if (!name || !shadow || !garlic || !pale || !accent) {
+              alert("Please fill out all fields.");
+              event.preventDefault();
+              return;
+            }
 
-        var vampireInputs = {
-          name: name,
-          shadow: shadow,
-          garlic: garlic,
-          pale: pale,
-          accent: accent,
-        };
+            var vampireInputs = {
+              name: name,
+              shadow: shadow,
+              garlic: garlic,
+              pale: pale,
+              accent: accent,
+            };
 
-        var vampireInputsArray =
-          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
-        vampireInputsArray.push(vampireInputs);
+            var vampireInputsArray =
+              JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+            vampireInputsArray.push(vampireInputs);
 
-        localStorage.setItem(
-          "vampireInputsArray",
-          JSON.stringify(vampireInputsArray)
-        );
-      }
+            localStorage.setItem(
+              "vampireInputsArray",
+              JSON.stringify(vampireInputsArray)
+            );
 
-      function getVampireInfoByName(name) {
-        var vampireInputsArray =
-          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
-        var vampireInfo = vampireInputsArray.find(function (vampire) {
-          return vampire.name === name;
-        });
+            document.querySelector("form").reset();
 
-        return vampireInfo;
-      }
+            window.location.href = "./vampireresult.html";
+
+            event.preventDefault();
+          });
+      });
     </script>
   </head>
   <body>
@@ -108,7 +108,7 @@
         /><br /><br />
 
         <div class="submit-reset">
-          <input type="submit" value="Submit" onclick="saveVampireInputs()" />
+          <input type="submit" value="Submit" />
           <input
             type="reset"
             value="Reset"
