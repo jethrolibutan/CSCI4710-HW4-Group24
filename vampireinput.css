@@ -1,0 +1,31 @@
+.vampire-input-form-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  max-width: 500px;
+  max-height: auto;
+  margin: auto;
+}
+
+.form-desc {
+  margin: 2em;
+}
+
+input[type="submit"],
+input[type="reset"] {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.submit-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.submit-reset input {
+  margin: 0 1em;
+}

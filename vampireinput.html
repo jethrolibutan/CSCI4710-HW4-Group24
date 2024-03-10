@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vampire Input Form</title>
+    <link rel="stylesheet" href="./vampireinput.css" />
+    <style>
+      input[type="number"],
+      input[type="text"] {
+        font-size: 16px;
+        width: 300px; /* Adjust the width as needed */
+      }
+    </style>
+    <script>
+      function saveVampireInputs() {
+        var name = document.getElementById("name").value;
+        var shadow = document.getElementById("shadow").value;
+        var garlic = document.getElementById("garlic").value;
+        var pale = document.getElementById("pale").value;
+        var accent = document.getElementById("accent").value;
+
+        // Validate form fields
+        if (!name || !shadow || !garlic || !pale || !accent) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        var vampireInputs = {
+          name: name,
+          shadow: shadow,
+          garlic: garlic,
+          pale: pale,
+          accent: accent,
+        };
+
+        var vampireInputsArray =
+          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+        vampireInputsArray.push(vampireInputs);
+
+        localStorage.setItem(
+          "vampireInputsArray",
+          JSON.stringify(vampireInputsArray)
+        );
+      }
+
+      function getVampireInfoByName(name) {
+        var vampireInputsArray =
+          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+        var vampireInfo = vampireInputsArray.find(function (vampire) {
+          return vampire.name === name;
+        });
+
+        return vampireInfo;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="vampire-input-form-content">
+      <h1>Vampire Input Form</h1>
+      <p class="form-desc">
+        Please fill out the form below with your vampire-related information.
+        Please make sure to only use characters when filling out the "Name." And
+        only use numbers when filling out the other fields.
+      </p>
+      <form>
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Enter Your Name"
+        /><br /><br />
+
+        <label for="shadow">Shadow:</label>
+        <input
+          type="number"
+          id="shadow"
+          name="shadow"
+          required
+          placeholder="Enter Shadow "
+        /><br /><br />
+
+        <label for="garlic">Garlic:</label>
+        <input
+          type="number"
+          id="garlic"
+          name="garlic"
+          required
+          placeholder="Enter Garlic Value"
+        /><br /><br />
+
+        <label for="pale">Pale Complexion:</label>
+        <input
+          type="number"
+          id="pale"
+          name="pale"
+          required
+          placeholder="Enter Pale Complexion Value"
+        /><br /><br />
+
+        <label for="accent">Accent:</label>
+        <input
+          type="number"
+          id="accent"
+          name="accent"
+          required
+          placeholder="Enter Accent Value"
+        /><br /><br />
+
+        <div class="submit-reset">
+          <input type="submit" value="Submit" onclick="saveVampireInputs()" />
+          <input
+            type="reset"
+            value="Reset"
+            onclick="document.querySelector('form').reset();"
+          />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
