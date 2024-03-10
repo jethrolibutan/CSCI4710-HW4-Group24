@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var vampireInputsArray = JSON.parse(
+          localStorage.getItem("vampireInputsArray")
+        );
+        var lastEntry = vampireInputsArray[vampireInputsArray.length - 1];
+        var resultElement = document.getElementById("result");
+
+        if (lastEntry) {
+          resultElement.textContent =
+            "Name: " +
+            lastEntry.name +
+            "\n" +
+            "Shadow: " +
+            lastEntry.shadow +
+            "\n" +
+            "Garlic: " +
+            lastEntry.garlic +
+            "\n" +
+            "Pale Complexion: " +
+            lastEntry.pale +
+            "\n" +
+            "Accent: " +
+            lastEntry.accent;
+        } else {
+          resultElement.textContent = "No data available";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Results</h1>
+    <p id="result"></p>
+  </body>
+</html>
