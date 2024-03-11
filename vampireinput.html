@@ -23,7 +23,7 @@
               'input[name="garlic"]:checked'
             ).value;
             var pale = document.getElementById("pale").value;
-            var isAVampire = "null";
+            var isAVampire = "";
 
             if (!name || !shadow || !garlic || !pale) {
               alert("Please fill out all fields.");
@@ -80,39 +80,39 @@
           type="radio"
           id="shadowTrue"
           name="shadow"
-          value="true"
+          value="yes"
           required
         />
-        <label for="shadowTrue">True</label>
+        <label for="shadowTrue">Yes</label>
         <input
           type="radio"
           id="shadowFalse"
           name="shadow"
-          value="false"
+          value="no"
           required
         />
-        <label for="shadowFalse">False</label><br /><br />
+        <label for="shadowFalse">No</label><br /><br />
 
         <label for="garlic"
           >Is your classmate able to eat garlic without having a bad allergic
-          reaction? Select "false" if he has a bad allergic reaction.
+          reaction? Select "no" if he has a bad allergic reaction.
         </label>
         <input
           type="radio"
           id="garlicTrue"
           name="garlic"
-          value="true"
+          value="yes"
           required
         />
-        <label for="garlicTrue">True</label>
+        <label for="garlicTrue">Yes</label>
         <input
           type="radio"
           id="garlicFalse"
           name="garlic"
-          value="false"
+          value="no"
           required
         />
-        <label for="garlicFalse">False</label><br /><br />
+        <label for="garlicFalse">No</label><br /><br />
 
         <label for="pale">Does your classmate have a pale complexion? </label>
         <input
