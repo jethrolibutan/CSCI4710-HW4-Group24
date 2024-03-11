@@ -19,30 +19,29 @@
             // Clear existing table rows
             tableBody.innerHTML = "";
 
-            // Iterate through each user in the vampireInputsArray
-            vampireInputsArray.forEach(function(user) {
-                var row = document.createElement("tr");
+            var lastUser = vampireInputsArray[vampireInputsArray.length - 1];
 
-                // Create table cells for each user property
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.name;
-                row.appendChild(nameCell);
+            var row = document.createElement("tr");
 
-                var shadowCell = document.createElement("td");
-                shadowCell.textContent = user.shadow;
-                row.appendChild(shadowCell);
+            // Create table cells for each user property
+            var nameCell = document.createElement("td");
+            nameCell.textContent = lastUser.name;
+            row.appendChild(nameCell);
 
-                var garlicCell = document.createElement("td");
-                garlicCell.textContent = user.garlic;
-                row.appendChild(garlicCell);
+            var shadowCell = document.createElement("td");
+            shadowCell.textContent = lastUser.shadow;
+            row.appendChild(shadowCell);
 
-                var paleCell = document.createElement("td");
-                paleCell.textContent = user.pale;
-                row.appendChild(paleCell);
+            var garlicCell = document.createElement("td");
+            garlicCell.textContent = lastUser.garlic;
+            row.appendChild(garlicCell);
 
-                // Append the row to the table body
-                tableBody.appendChild(row);
-            });
+            var paleCell = document.createElement("td");
+            paleCell.textContent = lastUser.pale;
+            row.appendChild(paleCell);
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
         };
     </script>
 
@@ -128,7 +127,25 @@
 <body>
 
 <div class="container">
-    <h2>How would you like to tell if your classmate is a vampire?</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Shadow</th>
+                <th>Garlic</th>
+                <th>Pale</th>
+            </tr>
+        </thead>
+
+        <h1> Here is your most recently entered classmate down below: </h1>
+        <tbody id="userTableBody">
+            <!-- User data is dynamically added here! -->
+        </tbody>
+    </table>
+
+
+    <h2>How would you like to tell if your most recentlye entered classmate is a vampire?</h2>
     <p> Please note that this page will tell if your most recently added classmate is a vampire or not.</p>
 
     <div class="form-group">
@@ -152,21 +169,6 @@
         <button type="button" onclick="viewClassmates()">View Classmates</button>
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Shadow</th>
-                <th>Garlic</th>
-                <th>Pale</th>
-            </tr>
-        </thead>
-
-        <h1> Here is all of your entered classmates! </h1>
-        <tbody id="userTableBody">
-            <!-- User data is dynamically added here! -->
-        </tbody>
-    </table>
 
 </div>
 

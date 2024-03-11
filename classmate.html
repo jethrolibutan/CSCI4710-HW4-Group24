@@ -9,82 +9,67 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        function insert_row(){
-            var table = document.getElementById("saving_table");
+        var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
+        var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
 
-            // Retrieve classmate data from local storage
-            var classmateArray = JSON.parse(localStorage.getItem("vampireInputArray"));
+        window.onload = function() {
+            var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
+            var tableBody = document.getElementById("userTableBody");
 
-            // Loop through the array and add classmate data to new rows
-            for (var i = 0; i < classmateArray.length; i++) {
-                var classmate = classmateArray[i];
+            // Clear existing table rows
+            tableBody.innerHTML = "";
 
-                // Create a new row
-                var row = table.insertRow(-1); // Insert at the end of the table
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
+            // Iterate through each user in the vampireInputsArray
+            vampireInputsArray.forEach(function(user) {
+                var row = document.createElement("tr");
 
-                // Populate the cells with classmate data
-                cell1.innerHTML = classmate.name;
-                cell2.innerHTML = classmate.garlic;
-                cell3.innerHTML = classmate.complexion;
-                cell4.innerHTML = classmate.accent;
-            }
-        }
-        function delete_row(){
-            document.getElementById("saving_table").deleteRow(1);
-        }
-        function delete_last_row(){
-            var table = document.getElementById('saving_table');
-            var row_count = table.rows.length;
+                // Create table cells for each user property
+                var nameCell = document.createElement("td");
+                nameCell.textContent = user.name;
+                row.appendChild(nameCell);
 
-            table.deleteRow(row_count - 1);
-        }
+                var shadowCell = document.createElement("td");
+                shadowCell.textContent = user.shadow;
+                row.appendChild(shadowCell);
+
+                var garlicCell = document.createElement("td");
+                garlicCell.textContent = user.garlic;
+                row.appendChild(garlicCell);
+
+                var paleCell = document.createElement("td");
+                paleCell.textContent = user.pale;
+                row.appendChild(paleCell);
+
+                // Append the row to the table body
+                tableBody.appendChild(row);
+            });
+        };
     </script>
+
+
 </head>
 <body>
 
 <div class="container">
-    <table class="table table-bordered" id="saving_table">
-        <caption>Savings</caption>
+
+    <table class="table">
         <thead>
             <tr>
-                <th>Classmate</th>
+                <th>Name</th>
+                <th>Shadow</th>
                 <th>Garlic</th>
-                <th>Complexion</th>
-                <th>Accent</th>
+                <th>Pale</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>John</td>
-                <td>Yes</td>
-                <td>Fair</td>
-                <td>American</td>
-            </tr>
-            <tr>
-                <td>Jane</td>
-                <td>No</td>
-                <td>Dark</td>
-                <td>British</td>
-            </tr>
+
+        <h1> Here is all of your entered classmates! </h1>
+        <tbody id="userTableBody">
+            <!-- User data is dynamically added here! -->
         </tbody>
-        <tfoot>
-            <tr>
-                <td>Sum</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tfoot>
     </table>
 
-    <button class="btn btn-primary" onclick="insert_row()">Insert a Row</button>
-    <button class="btn btn-primary" onclick="delete_row()">Delete the second Row</button>
-    <button class="btn btn-primary" onclick="delete_last_row()">Delete the last Row</button>
 </div>
+
 
 </body>
 </html>
