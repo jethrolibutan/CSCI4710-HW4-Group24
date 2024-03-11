@@ -175,10 +175,6 @@
       function display_chosen_option(selectedValue) {
         switch (selectedValue) {
           case "1":
-            var vampireInputsArray =
-              JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
-            var lastItem = vampireInputsArray[vampireInputsArray.length - 1];
-
             var classmate_data = [
               {
                 name: "John",
@@ -212,14 +208,20 @@
               },
             ];
 
-            var classmate_data = classmate_data.concat(lastItem);
+            // Clear existing data in local storage
+            localStorage.removeItem("vampireInputsArray");
+
+            var vampireInputsArray =
+              JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+
+            var newClassmateData = classmate_data.concat(vampireInputsArray);
 
             var tableBody = document.getElementById("userTableBody");
 
             // Clear existing table rows
             tableBody.innerHTML = "";
 
-            classmate_data.forEach(function (user) {
+            newClassmateData.forEach(function (user) {
               var row = document.createElement("tr");
 
               var nameCell = document.createElement("td");
@@ -238,7 +240,7 @@
               paleCell.textContent = user.pale;
               row.appendChild(paleCell);
 
-              // Randomly determine if a classmate is a vampire or not
+              // Random calculating if a classmate is a vampire or not
               var isVampire = Math.random() < 0.5;
               user.isAVampire = isVampire;
 
@@ -247,15 +249,15 @@
               row.appendChild(vampireCell);
 
               tableBody.appendChild(row);
+
+              // Set the updated vampireInputsArray in local storage
+              localStorage.setItem(
+                "vampireInputsArray",
+                JSON.stringify(newClassmateData)
+              );
             });
 
-            // Set the updated classmate_data in local storage
-            localStorage.setItem(
-              "vampireInputsArray",
-              JSON.stringify(classmate_data)
-            );
             break;
-
           // Other cases
 
           case "2":
@@ -414,7 +416,7 @@
           type="button"
           onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();"
         >
-          Deselect all options
+          Deselect all options.
         </button>
       </div>
 
