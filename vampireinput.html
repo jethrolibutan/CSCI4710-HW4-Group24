@@ -22,9 +22,7 @@
             var garlic = document.querySelector(
               'input[name="garlic"]:checked'
             ).value;
-            var pale = document.querySelector(
-              'input[name="pale"]:checked'
-            ).value;
+            var pale = document.getElementById("pale").value;
             var isAVampire = "null";
 
             if (!name || !shadow || !garlic || !pale) {
@@ -117,10 +115,13 @@
         <label for="garlicFalse">False</label><br /><br />
 
         <label for="pale">Does your classmate have a pale complexion? </label>
-        <input type="radio" id="paleTrue" name="pale" value="true" required />
-        <label for="paleTrue">True</label>
-        <input type="radio" id="paleFalse" name="pale" value="false" required />
-        <label for="paleFalse">False</label><br /><br />
+        <input
+          type="text"
+          id="pale"
+          name="pale"
+          required
+          placeholder="Enter a complexion"
+        /><br /><br />
 
         <div class="submit-reset"></div>
         <input type="submit" value="Submit" />

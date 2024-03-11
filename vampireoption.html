@@ -116,32 +116,32 @@
           {
             name: "John",
             shadow: "no",
-            galic: "no",
-            complexion: "pale",
+            garlic: "no",
+            pale: "pale",
           },
           {
             name: "Lee",
             shadow: "yes",
-            galic: "no",
-            complexion: "pale",
+            garlic: "no",
+            pale: "pale",
           },
           {
             name: "Emma",
             shadow: "no",
-            galic: "yes",
-            complexion: "brown",
+            garlic: "yes",
+            pale: "brown",
           },
           {
             name: "Ava",
             shadow: "yes",
-            galic: "yes",
-            complexion: "olive ",
+            garlic: "yes",
+            pale: "olive ",
           },
           {
             name: "Alex",
             shadow: "no",
-            galic: "no",
-            complexion: "brown",
+            garlic: "no",
+            pale: "brown",
           },
         ];
 
@@ -158,11 +158,9 @@
         // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        // Iterating through each user in the vampireInputsArray
-        vampireInputsArray.forEach(function (user) {
+        classmate_data.forEach(function (user) {
           var row = document.createElement("tr");
 
-          // Create table cells for each user property
           var nameCell = document.createElement("td");
           nameCell.textContent = user.name;
           row.appendChild(nameCell);
@@ -177,13 +175,8 @@
 
           var paleCell = document.createElement("td");
           paleCell.textContent = user.pale;
-          row.appendChild(paleCell);
+          row.appendChild(paleCell); // Fixed this line
 
-          var vampireCell = document.createElement("td");
-          vampireCell.textContent = user.isAVampire;
-          row.appendChild(vampireCell);
-
-          // Append the row to the table body
           tableBody.appendChild(row);
         });
       };
@@ -193,32 +186,51 @@
       function display_chosen_option(selectedValue) {
         switch (selectedValue) {
           case "1":
-            var vampireInputs = JSON.parse(
-              localStorage.getItem("vampireInputsArray")
-            );
+            var classmate_data = [
+              {
+                name: "John",
+                shadow: "no",
+                garlic: "no",
+                pale: "pale",
+              },
+              {
+                name: "Lee",
+                shadow: "yes",
+                garlic: "no",
+                pale: "pale",
+              },
+              {
+                name: "Emma",
+                shadow: "no",
+                garlic: "yes",
+                pale: "brown",
+              },
+              {
+                name: "Ava",
+                shadow: "yes",
+                garlic: "yes",
+                pale: "olive ",
+              },
+              {
+                name: "Alex",
+                shadow: "no",
+                garlic: "no",
+                pale: "brown",
+              },
+            ];
+            var vampireInputsArray =
+              JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
 
-            vampireInputs.forEach(function (vampire) {
-              vampire.isAVampire = Math.random() < 0.5;
-            });
+            var newClassmateData = classmate_data.concat(vampireInputsArray);
 
-            localStorage.setItem(
-              "vampireInputsArray",
-              JSON.stringify(vampireInputs)
-            );
-
-            var vampireInputsArray = JSON.parse(
-              localStorage.getItem("vampireInputsArray")
-            );
             var tableBody = document.getElementById("userTableBody");
 
             // Clear existing table rows
             tableBody.innerHTML = "";
 
-            // Iterate through each user in the vampireInputsArray
-            vampireInputsArray.forEach(function (user) {
+            newClassmateData.forEach(function (user) {
               var row = document.createElement("tr");
 
-              // Create table cells for each user property
               var nameCell = document.createElement("td");
               nameCell.textContent = user.name;
               row.appendChild(nameCell);
@@ -243,11 +255,12 @@
               vampireCell.textContent = user.isAVampire;
               row.appendChild(vampireCell);
 
-              // Append the row to the table body
               tableBody.appendChild(row);
             });
 
             break;
+          // Other cases
+
           case "2":
             var vampireInputsArray = JSON.parse(
               localStorage.getItem("vampireInputsArray")
@@ -261,7 +274,7 @@
               if (vampire.garlic === "false") {
                 count += 3;
               }
-              if (vampire.pale === "true") {
+              if (vampire.pale === "pale") {
                 count += 3;
               }
 
@@ -280,6 +293,28 @@
             var tableBody = document.getElementById("userTableBody");
 
             tableBody.innerHTML = "";
+
+            classmate_data.forEach(function (user) {
+              var row = document.createElement("tr");
+
+              var nameCell = document.createElement("td");
+              nameCell.textContent = user.name;
+              row.appendChild(nameCell);
+
+              var shadowCell = document.createElement("td");
+              shadowCell.textContent = user.shadow;
+              row.appendChild(shadowCell);
+
+              var garlicCell = document.createElement("td");
+              garlicCell.textContent = user.galic;
+              row.appendChild(garlicCell);
+
+              var paleCell = document.createElement("td");
+              paleCell.textContent = user.complexion;
+              row.appendChild(paleCell);
+
+              tableBody.appendChild(row);
+            });
 
             vampireInputsArray.forEach(function (user) {
               var row = document.createElement("tr");
