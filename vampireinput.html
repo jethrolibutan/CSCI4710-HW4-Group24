@@ -25,6 +25,7 @@
             var pale = document.querySelector(
               'input[name="pale"]:checked'
             ).value;
+            var isAVampire = "null";
 
             if (!name || !shadow || !garlic || !pale) {
               alert("Please fill out all fields.");
@@ -37,6 +38,7 @@
               shadow: shadow,
               garlic: garlic,
               pale: pale,
+              isAVampire: isAVampire,
             };
 
             var vampireInputsArray =

@@ -25,32 +25,37 @@
         );
         var tableBody = document.getElementById("userTableBody");
 
-        // Clear existing table rows
+        // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        var lastUser = vampireInputsArray[vampireInputsArray.length - 1];
+        // Iterating through each user in the vampireInputsArray
+        vampireInputsArray.forEach(function (user) {
+          var row = document.createElement("tr");
 
-        var row = document.createElement("tr");
+          // Create table cells for each user property
+          var nameCell = document.createElement("td");
+          nameCell.textContent = user.name;
+          row.appendChild(nameCell);
 
-        // Create table cells for each user property
-        var nameCell = document.createElement("td");
-        nameCell.textContent = lastUser.name;
-        row.appendChild(nameCell);
+          var shadowCell = document.createElement("td");
+          shadowCell.textContent = user.shadow;
+          row.appendChild(shadowCell);
 
-        var shadowCell = document.createElement("td");
-        shadowCell.textContent = lastUser.shadow;
-        row.appendChild(shadowCell);
+          var garlicCell = document.createElement("td");
+          garlicCell.textContent = user.garlic;
+          row.appendChild(garlicCell);
 
-        var garlicCell = document.createElement("td");
-        garlicCell.textContent = lastUser.garlic;
-        row.appendChild(garlicCell);
+          var paleCell = document.createElement("td");
+          paleCell.textContent = user.pale;
+          row.appendChild(paleCell);
 
-        var paleCell = document.createElement("td");
-        paleCell.textContent = lastUser.pale;
-        row.appendChild(paleCell);
+          var vampireCell = document.createElement("td");
+          vampireCell.textContent = user.isAVampire;
+          row.appendChild(vampireCell);
 
-        // Append the row to the table body
-        tableBody.appendChild(row);
+          // Append the row to the table body
+          tableBody.appendChild(row);
+        });
       };
     </script>
 
@@ -61,26 +66,57 @@
             var vampireInputs = JSON.parse(
               localStorage.getItem("vampireInputsArray")
             );
-            var lastEntry = vampireInputs
-              ? vampireInputs[vampireInputs.length - 1]
-              : null;
-            var resultElement = document.getElementById("result");
-            var resultExplanation =
-              document.getElementById("resultExplanation");
-            var name = "";
 
-            name = lastEntry.name;
+            vampireInputs.forEach(function (vampire) {
+              vampire.isAVampire = Math.random() < 0.5;
+            });
 
-            var isVampire = Math.random() < 0.5; // Here this code randomly guesses if the classmate is a vampire or not using the Math.Random() function.
+            localStorage.setItem(
+              "vampireInputsArray",
+              JSON.stringify(vampireInputs)
+            );
 
-            resultElement.textContent = "";
-            resultExplanation.textContent = "";
+            var vampireInputsArray = JSON.parse(
+              localStorage.getItem("vampireInputsArray")
+            );
+            var tableBody = document.getElementById("userTableBody");
 
-            if (isVampire) {
-              resultElement.textContent = name + " is a vampire";
-            } else {
-              resultElement.textContent = name + " is not a vampire";
-            }
+            // Clear existing table rows
+            tableBody.innerHTML = "";
+
+            // Iterate through each user in the vampireInputsArray
+            vampireInputsArray.forEach(function (user) {
+              var row = document.createElement("tr");
+
+              // Create table cells for each user property
+              var nameCell = document.createElement("td");
+              nameCell.textContent = user.name;
+              row.appendChild(nameCell);
+
+              var shadowCell = document.createElement("td");
+              shadowCell.textContent = user.shadow;
+              row.appendChild(shadowCell);
+
+              var garlicCell = document.createElement("td");
+              garlicCell.textContent = user.garlic;
+              row.appendChild(garlicCell);
+
+              var paleCell = document.createElement("td");
+              paleCell.textContent = user.pale;
+              row.appendChild(paleCell);
+
+              // Random calculating if a classmate is a vampire or not
+              var isVampire = Math.random() < 0.5;
+              user.isAVampire = isVampire;
+
+              var vampireCell = document.createElement("td");
+              vampireCell.textContent = user.isAVampire;
+              row.appendChild(vampireCell);
+
+              // Append the row to the table body
+              tableBody.appendChild(row);
+            });
+
             break;
           case "2":
             var vampireInputsArray = JSON.parse(
@@ -155,23 +191,18 @@
             <th>Shadow</th>
             <th>Garlic</th>
             <th>Pale</th>
+            <th>Is A Vampire?</th>
           </tr>
         </thead>
 
-        <h1>Here is your most recently entered classmate down below:</h1>
+        <h1>Here is a table of all of your classmates:</h1>
         <tbody id="userTableBody">
           <!-- User data is dynamically added here! -->
         </tbody>
       </table>
 
-      <h2>
-        How would you like to tell if your most recentlye entered classmate is a
-        vampire?
-      </h2>
-      <p>
-        Please note that this page will tell if your most recently added
-        classmate is a vampire or not.
-      </p>
+      <h2>How would you like to tell if your classmates are vampires?</h2>
+      <p>Click on one of the "controller" methods below!</p>
 
       <div class="form-group">
         <label for="mySelect">Select Model Logic:</label>
@@ -200,15 +231,15 @@
         <p id="resultExplanation"></p>
       </div>
 
-      <div class="form-group">
-        <button type="button" onclick="viewClassmates()">
-          View Classmates
-        </button>
-      </div>
+      <!-- <div class="form-group">
+            <button type="button" onclick="viewClassmates()">
+                View Classmates
+            </button>
+        </div>
 
-      <button onclick="window.location.href='vampireinput.html'">
-        Go Back One Page
-      </button>
+        <button onclick="window.location.href='vampireinput.html'">
+            Go Back One Page
+        </button> -->
     </div>
   </body>
 </html>
