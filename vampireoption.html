@@ -128,14 +128,18 @@
               if (vampire.shadow === "false") {
                 count += 4;
               }
-              if (vampire.garlic === "true") {
+              if (vampire.garlic === "false") {
                 count += 3;
               }
               if (vampire.pale === "true") {
                 count += 3;
               }
 
-              vampire.isAVampire = count > 6; // Update isAVampire property
+              if (count > 6) {
+                vampire.isAVampire = "true";
+              } else if (count <= 6) {
+                vampire.isAVampire = "false";
+              }
             });
 
             localStorage.setItem(
@@ -175,7 +179,9 @@
 
             break;
           default:
-            alert("Invalid option selected!");
+            alert(
+              "Invalid option selected! Please select an option to get your results!"
+            );
             break;
         }
       }
@@ -210,7 +216,10 @@
       </table>
 
       <h2>How would you like to tell if your classmates are vampires?</h2>
-      <p>Click on one of the "controller" methods below!</p>
+      <p>
+        Click on one of the "controller" methods below to figure out if your
+        classmates are a vampire or not!
+      </p>
 
       <div class="form-group">
         <label for="mySelect">Select Model Logic:</label>
