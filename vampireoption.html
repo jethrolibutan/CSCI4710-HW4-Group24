@@ -122,53 +122,61 @@
             var vampireInputsArray = JSON.parse(
               localStorage.getItem("vampireInputsArray")
             );
-            var lastEntry = vampireInputsArray
-              ? vampireInputsArray[vampireInputsArray.length - 1]
-              : null;
-            var resultElement = document.getElementById("result");
-            var resultExplanation =
-              document.getElementById("resultExplanation");
-            var name = "";
-
-            name = lastEntry.name;
-
-            if (lastEntry) {
-              name = lastEntry.name;
-
+            vampireInputsArray.forEach(function (vampire) {
               var count = 0;
-              if (lastEntry.shadow === "false") {
+
+              if (vampire.shadow === "false") {
                 count += 4;
               }
-              if (lastEntry.garlic === "true") {
+              if (vampire.garlic === "true") {
                 count += 3;
               }
-              if (lastEntry.pale === "true") {
+              if (vampire.pale === "true") {
                 count += 3;
               }
 
-              if (count > 6) {
-                resultElement.textContent = name + " is a vampire";
-                resultExplanation.textContent =
-                  "The vampire detection algorithm has determined that " +
-                  name +
-                  " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
-              } else if (count <= 6) {
-                resultElement.textContent = name + " is not a vampire";
-                resultExplanation.textContent =
-                  "The vampire detection algorithm has determined that " +
-                  name +
-                  " is not a vampire based on the input provided. Your classmate did not meet the threshold for becoming a vampire.";
-              }
-            } else {
-              resultElement.textContent = "No data available";
-              resultExplanation.textContent =
-                "No explanation available because there is no data available";
-            }
+              vampire.isAVampire = count > 6; // Update isAVampire property
+            });
+
+            localStorage.setItem(
+              "vampireInputsArray",
+              JSON.stringify(vampireInputsArray)
+            );
+
+            var tableBody = document.getElementById("userTableBody");
+
+            tableBody.innerHTML = "";
+
+            vampireInputsArray.forEach(function (user) {
+              var row = document.createElement("tr");
+
+              var nameCell = document.createElement("td");
+              nameCell.textContent = user.name;
+              row.appendChild(nameCell);
+
+              var shadowCell = document.createElement("td");
+              shadowCell.textContent = user.shadow;
+              row.appendChild(shadowCell);
+
+              var garlicCell = document.createElement("td");
+              garlicCell.textContent = user.garlic;
+              row.appendChild(garlicCell);
+
+              var paleCell = document.createElement("td");
+              paleCell.textContent = user.pale;
+              row.appendChild(paleCell);
+
+              var vampireCell = document.createElement("td");
+              vampireCell.textContent = user.isAVampire;
+              row.appendChild(vampireCell);
+
+              tableBody.appendChild(row);
+            });
+
             break;
           default:
-            $("#result").text(
-              "Invalid option selected! Please either chose Random Guess or Threshold Based Method."
-            );
+            alert("Invalid option selected!");
+            break;
         }
       }
 
