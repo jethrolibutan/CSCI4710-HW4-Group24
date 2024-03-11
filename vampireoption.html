@@ -97,15 +97,21 @@
       }
 
       window.onload = function () {
-        var tableBody = document.getElementById("userTableBody");
         var vampireInputsArray = JSON.parse(
           localStorage.getItem("vampireInputsArray")
         );
 
+        updatedClassmateData = classmate_data.concat(vampireInputsArray);
+
+        console.log(vampireInputsArray);
+        console.log(updatedClassmateData);
+
+        var tableBody = document.getElementById("userTableBody");
+
         // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        vampireInputsArray.forEach(function (user) {
+        updatedClassmateData.forEach(function (user) {
           var row = document.createElement("tr");
 
           var nameCell = document.createElement("td");
@@ -122,10 +128,17 @@
 
           var paleCell = document.createElement("td");
           paleCell.textContent = user.pale;
-          row.appendChild(paleCell); // Fixed this line
+          row.appendChild(paleCell);
 
           tableBody.appendChild(row);
         });
+
+        localStorage.setItem(
+          "vampireInputsArray",
+          JSON.stringify(updatedClassmateData)
+        );
+
+        var tableBody = document.getElementById("userTableBody");
       };
     </script>
 
@@ -166,11 +179,11 @@
               },
             ];
 
-            // Clear existing data in local storage
-            localStorage.removeItem("vampireInputsArray");
+            // // Clear existing data in local storage
+            // localStorage.removeItem("vampireInputsArray");
 
-            var vampireInputsArray =
-              JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+            // var vampireInputsArray =
+            //   JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
 
             var newClassmateData = classmate_data.concat(vampireInputsArray);
 
