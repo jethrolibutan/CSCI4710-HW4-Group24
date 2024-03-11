@@ -21,39 +21,34 @@
         {
           name: "John",
           shadow: "no",
-          galic: "no",
-          complexion: "pale",
+          garlic: "no",
+          pale: "pale",
         },
         {
           name: "Lee",
           shadow: "yes",
-          galic: "no",
-          complexion: "pale",
+          garlic: "no",
+          pale: "pale",
         },
         {
           name: "Emma",
           shadow: "no",
-          galic: "yes",
-          complexion: "brown",
+          garlic: "yes",
+          pale: "brown",
         },
         {
           name: "Ava",
           shadow: "yes",
-          galic: "yes",
-          complexion: "olive ",
+          garlic: "yes",
+          pale: "olive ",
         },
         {
           name: "Alex",
           shadow: "no",
-          galic: "no",
-          complexion: "brown",
+          garlic: "no",
+          pale: "brown",
         },
       ];
-
-      var vampireInputsArray =
-        JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
-
-      classmate_data = classmate_data.concat(vampireInputsArray);
 
       // Drawing the chart
 
@@ -102,42 +97,6 @@
       }
 
       window.onload = function () {
-        var classmate_data = [
-          {
-            name: "John",
-            shadow: "no",
-            garlic: "no",
-            pale: "pale",
-          },
-          {
-            name: "Lee",
-            shadow: "yes",
-            garlic: "no",
-            pale: "pale",
-          },
-          {
-            name: "Emma",
-            shadow: "no",
-            garlic: "yes",
-            pale: "brown",
-          },
-          {
-            name: "Ava",
-            shadow: "yes",
-            garlic: "yes",
-            pale: "olive ",
-          },
-          {
-            name: "Alex",
-            shadow: "no",
-            garlic: "no",
-            pale: "brown",
-          },
-        ];
-
-        var vampireInputsArray =
-          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
-
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
