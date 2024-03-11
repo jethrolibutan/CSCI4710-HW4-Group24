@@ -138,6 +138,10 @@
         var vampireInputsArray =
           JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
 
+        var lastItem = vampireInputsArray[vampireInputsArray.length - 1];
+
+        classmate_data = classmate_data.concat(lastItem);
+
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
