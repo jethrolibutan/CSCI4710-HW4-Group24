@@ -55,10 +55,6 @@
 
       classmate_data = classmate_data.concat(vampireInputsArray);
 
-      var lastEntry = vampireInputsArray
-        ? vampireInputsArray[vampireInputsArray.length - 1]
-        : null;
-
       // Load the Visualization API and the corechart package.
       google.charts.load("current", { packages: ["corechart"] });
 
@@ -175,6 +171,8 @@
           row.appendChild(paleCell); // Fixed this line
 
           tableBody.appendChild(row);
+
+          drawChart();
         });
       };
     </script>
@@ -215,6 +213,10 @@
                 pale: "brown",
               },
             ];
+
+            // Clear existing data in local storage
+            localStorage.removeItem("vampireInputsArray");
+
             var vampireInputsArray =
               JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
 
@@ -253,6 +255,12 @@
               row.appendChild(vampireCell);
 
               tableBody.appendChild(row);
+
+              // Set the updated vampireInputsArray in local storage
+              localStorage.setItem(
+                "vampireInputsArray",
+                JSON.stringify(newClassmateData)
+              );
             });
 
             break;
