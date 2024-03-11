@@ -98,11 +98,14 @@
 
       window.onload = function () {
         var tableBody = document.getElementById("userTableBody");
+        var vampireInputsArray = JSON.parse(
+          localStorage.getItem("vampireInputsArray")
+        );
 
         // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        classmate_data.forEach(function (user) {
+        vampireInputsArray.forEach(function (user) {
           var row = document.createElement("tr");
 
           var nameCell = document.createElement("td");
