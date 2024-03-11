@@ -150,9 +150,6 @@
 
         classmate_data = classmate_data.concat(vampireInputsArray);
 
-        var lastEntry = vampireInputsArray
-          ? vampireInputsArray[vampireInputsArray.length - 1]
-          : null;
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
@@ -262,62 +259,65 @@
           // Other cases
 
           case "2":
+            var classmate_data = [
+              {
+                name: "John",
+                shadow: "no",
+                garlic: "no",
+                pale: "pale",
+              },
+              {
+                name: "Lee",
+                shadow: "yes",
+                garlic: "no",
+                pale: "pale",
+              },
+              {
+                name: "Emma",
+                shadow: "no",
+                garlic: "yes",
+                pale: "brown",
+              },
+              {
+                name: "Ava",
+                shadow: "yes",
+                garlic: "yes",
+                pale: "olive",
+              },
+              {
+                name: "Alex",
+                shadow: "no",
+                garlic: "no",
+                pale: "brown",
+              },
+            ];
+
             var vampireInputsArray = JSON.parse(
               localStorage.getItem("vampireInputsArray")
             );
-            vampireInputsArray.forEach(function (vampire) {
-              var count = 0;
 
-              if (vampire.shadow === "false") {
-                count += 4;
-              }
-              if (vampire.garlic === "false") {
-                count += 3;
-              }
-              if (vampire.pale === "pale") {
-                count += 3;
-              }
-
-              if (count > 6) {
-                vampire.isAVampire = "true";
-              } else if (count <= 6) {
-                vampire.isAVampire = "false";
-              }
-            });
-
-            localStorage.setItem(
-              "vampireInputsArray",
-              JSON.stringify(vampireInputsArray)
-            );
+            var newClassmateData = classmate_data.concat(vampireInputsArray);
 
             var tableBody = document.getElementById("userTableBody");
 
+            // Clear existing table rows
             tableBody.innerHTML = "";
 
-            classmate_data.forEach(function (user) {
+            newClassmateData.forEach(function (user) {
               var row = document.createElement("tr");
+              var count = 0;
 
-              var nameCell = document.createElement("td");
-              nameCell.textContent = user.name;
-              row.appendChild(nameCell);
+              if (user.shadow === "false") {
+                count += 4;
+              }
+              if (user.garlic === "false") {
+                count += 3;
+              }
+              if (user.pale === "pale") {
+                count += 3;
+              }
 
-              var shadowCell = document.createElement("td");
-              shadowCell.textContent = user.shadow;
-              row.appendChild(shadowCell);
-
-              var garlicCell = document.createElement("td");
-              garlicCell.textContent = user.galic;
-              row.appendChild(garlicCell);
-
-              var paleCell = document.createElement("td");
-              paleCell.textContent = user.complexion;
-              row.appendChild(paleCell);
-
-              tableBody.appendChild(row);
-            });
-
-            vampireInputsArray.forEach(function (user) {
-              var row = document.createElement("tr");
+              user.isAVampire = count > 6 ? "true" : "false";
 
               var nameCell = document.createElement("td");
               nameCell.textContent = user.name;
@@ -343,6 +343,7 @@
             });
 
             break;
+
           default:
             alert(
               "Invalid option selected! Please select an option to get your results!"
