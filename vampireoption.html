@@ -55,15 +55,11 @@
 
       classmate_data = classmate_data.concat(vampireInputsArray);
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load("current", { packages: ["corechart"] });
+      // Drawing the chart
 
-      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
       function drawChart() {
         var data = new google.visualization.DataTable();
 
@@ -82,8 +78,6 @@
         );
         chart.draw(data, options);
       }
-
-      // model of MVC
 
       function classmate_data_processing(result_data) {
         // this function process classmate data and create data table
@@ -144,8 +138,6 @@
         var vampireInputsArray =
           JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
 
-        classmate_data = classmate_data.concat(vampireInputsArray);
-
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
@@ -171,8 +163,6 @@
           row.appendChild(paleCell); // Fixed this line
 
           tableBody.appendChild(row);
-
-          drawChart();
         });
       };
     </script>
