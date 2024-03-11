@@ -267,6 +267,9 @@
           // Other cases
 
           case "2":
+            // Clear existing data in local storage
+            localStorage.removeItem("vampireInputsArray");
+
             var classmate_data = [
               {
                 name: "John",
@@ -348,6 +351,12 @@
               row.appendChild(vampireCell);
 
               tableBody.appendChild(row);
+
+              // Set the updated vampireInputsArray in local storage
+              localStorage.setItem(
+                "vampireInputsArray",
+                JSON.stringify(newClassmateData)
+              );
             });
 
             break;
