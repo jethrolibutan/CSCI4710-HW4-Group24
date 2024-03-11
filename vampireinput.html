@@ -16,9 +16,15 @@
           .querySelector("form")
           .addEventListener("submit", function (event) {
             var name = document.getElementById("name").value;
-            var shadow = document.querySelector('input[name="shadow"]:checked').value;
-            var garlic = document.querySelector('input[name="garlic"]:checked').value;
-            var pale = document.querySelector('input[name="pale"]:checked').value;
+            var shadow = document.querySelector(
+              'input[name="shadow"]:checked'
+            ).value;
+            var garlic = document.querySelector(
+              'input[name="garlic"]:checked'
+            ).value;
+            var pale = document.querySelector(
+              'input[name="pale"]:checked'
+            ).value;
 
             if (!name || !shadow || !garlic || !pale) {
               alert("Please fill out all fields.");
@@ -70,15 +76,39 @@
         /><br /><br />
 
         <label for="shadow">Does your classmate have a shadow?</label>
-        <input type="radio" id="shadowTrue" name="shadow" value="true" required />
+        <input
+          type="radio"
+          id="shadowTrue"
+          name="shadow"
+          value="true"
+          required
+        />
         <label for="shadowTrue">True</label>
-        <input type="radio" id="shadowFalse" name="shadow" value="false" required />
+        <input
+          type="radio"
+          id="shadowFalse"
+          name="shadow"
+          value="false"
+          required
+        />
         <label for="shadowFalse">False</label><br /><br />
 
         <label for="garlic">Is your classmate allergic to garlic?</label>
-        <input type="radio" id="garlicTrue" name="garlic" value="true" required />
+        <input
+          type="radio"
+          id="garlicTrue"
+          name="garlic"
+          value="true"
+          required
+        />
         <label for="garlicTrue">True</label>
-        <input type="radio" id="garlicFalse" name="garlic" value="false" required />
+        <input
+          type="radio"
+          id="garlicFalse"
+          name="garlic"
+          value="false"
+          required
+        />
         <label for="garlicFalse">False</label><br /><br />
 
         <label for="pale">Does your classmate have a pale complexion? </label>
@@ -95,6 +125,10 @@
           onclick="document.querySelector('form').reset();"
         />
       </form>
+
+      <button onclick="window.location.href='home.html'">
+        Go Back One Page
+      </button>
     </div>
   </body>
 </html>
