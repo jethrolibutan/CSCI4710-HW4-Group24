@@ -16,12 +16,11 @@
           .querySelector("form")
           .addEventListener("submit", function (event) {
             var name = document.getElementById("name").value;
-            var shadow = document.getElementById("shadow").value;
-            var garlic = document.getElementById("garlic").value;
-            var pale = document.getElementById("pale").value;
-            var accent = document.getElementById("accent").value;
+            var shadow = document.querySelector('input[name="shadow"]:checked').value;
+            var garlic = document.querySelector('input[name="garlic"]:checked').value;
+            var pale = document.querySelector('input[name="pale"]:checked').value;
 
-            if (!name || !shadow || !garlic || !pale || !accent) {
+            if (!name || !shadow || !garlic || !pale) {
               alert("Please fill out all fields.");
               event.preventDefault();
               return;
@@ -32,7 +31,6 @@
               shadow: shadow,
               garlic: garlic,
               pale: pale,
-              accent: accent,
             };
 
             var vampireInputsArray =
@@ -46,7 +44,7 @@
 
             document.querySelector("form").reset();
 
-            window.location.href = "./vampireresult.html";
+            window.location.href = "./vampireoption.html";
 
             event.preventDefault();
           });
@@ -72,49 +70,30 @@
         /><br /><br />
 
         <label for="shadow">Shadow:</label>
-        <input
-          type="number"
-          id="shadow"
-          name="shadow"
-          required
-          placeholder="Enter Shadow "
-        /><br /><br />
+        <input type="radio" id="shadowTrue" name="shadow" value="true" required />
+        <label for="shadowTrue">True</label>
+        <input type="radio" id="shadowFalse" name="shadow" value="false" required />
+        <label for="shadowFalse">False</label><br /><br />
 
         <label for="garlic">Garlic:</label>
-        <input
-          type="number"
-          id="garlic"
-          name="garlic"
-          required
-          placeholder="Enter Garlic Value"
-        /><br /><br />
+        <input type="radio" id="garlicTrue" name="garlic" value="true" required />
+        <label for="garlicTrue">True</label>
+        <input type="radio" id="garlicFalse" name="garlic" value="false" required />
+        <label for="garlicFalse">False</label><br /><br />
 
         <label for="pale">Pale Complexion:</label>
-        <input
-          type="number"
-          id="pale"
-          name="pale"
-          required
-          placeholder="Enter Pale Complexion Value"
-        /><br /><br />
+        <input type="radio" id="paleTrue" name="pale" value="true" required />
+        <label for="paleTrue">True</label>
+        <input type="radio" id="paleFalse" name="pale" value="false" required />
+        <label for="paleFalse">False</label><br /><br />
 
-        <label for="accent">Accent:</label>
+        <div class="submit-reset"></div>
+        <input type="submit" value="Submit" />
         <input
-          type="number"
-          id="accent"
-          name="accent"
-          required
-          placeholder="Enter Accent Value"
-        /><br /><br />
-
-        <div class="submit-reset">
-          <input type="submit" value="Submit" />
-          <input
-            type="reset"
-            value="Reset"
-            onclick="document.querySelector('form').reset();"
-          />
-        </div>
+          type="reset"
+          value="Reset"
+          onclick="document.querySelector('form').reset();"
+        />
       </form>
     </div>
   </body>
