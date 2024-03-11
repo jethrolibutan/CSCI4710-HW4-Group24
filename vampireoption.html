@@ -10,18 +10,57 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
 
     <script type="text/javascript">
-      var vampireInputsArray = JSON.parse(
-        localStorage.getItem("vampireInputsArray")
-      );
+      // array of json objects
+      var classmate_data = [
+        {
+          name: "John",
+          shadow: "no",
+          galic: "no",
+          complexion: "pale",
+        },
+        {
+          name: "Lee",
+          shadow: "yes",
+          galic: "no",
+          complexion: "pale",
+        },
+        {
+          name: "Emma",
+          shadow: "no",
+          galic: "yes",
+          complexion: "brown",
+        },
+        {
+          name: "Ava",
+          shadow: "yes",
+          galic: "yes",
+          complexion: "olive ",
+        },
+        {
+          name: "Alex",
+          shadow: "no",
+          galic: "no",
+          complexion: "brown",
+        },
+      ];
+
+      var vampireInputsArray =
+        JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+
+      classmate_data = classmate_data.concat(vampireInputsArray);
+
       var lastEntry = vampireInputsArray
         ? vampireInputsArray[vampireInputsArray.length - 1]
         : null;
 
       // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+      google.charts.load("current", { packages: ["corechart"] });
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.charts.setOnLoadCallback(drawChart);
@@ -31,51 +70,89 @@
       // draws it.
       function drawChart() {
         var data = new google.visualization.DataTable();
-      
+
         classmate_data_processing(data);
 
-  
         // Set chart options
-        var options = {'title':'How many vampires in the class?',
-                     'width':400,
-                     'height':300};
+        var options = {
+          title: "How many vampires in the class?",
+          width: 400,
+          height: 300,
+        };
 
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-
-    // model of MVC
-    
-    function classmate_data_processing(result_data){
-      // this function process classmate data and create data table
-      var num_human = 0;
-      var num_vampire = 0;
-      for (var i =  0; i <= classmate_data.length - 1; i++) {
-        // logic based on shadow 
-        if(classmate_data[i]['shadow'] == 'no'){
-          // num_vampire = num_vampire + 1;
-          num_vampire ++;
-        }
-        else{
-          num_human ++;
-        }
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(
+          document.getElementById("chart_div")
+        );
+        chart.draw(data, options);
       }
-      // Create the data table.
-      result_data.addColumn('string', 'Element');
-      result_data.addColumn('number', 'Count');
-      result_data.addRows([     
-        ['Human', num_human],
-        ['Vampire', num_vampire]
-      ]);
 
-    }
+      // model of MVC
 
+      function classmate_data_processing(result_data) {
+        // this function process classmate data and create data table
+        var num_human = 0;
+        var num_vampire = 0;
+        for (var i = 0; i <= classmate_data.length - 1; i++) {
+          // logic based on shadow
+          if (classmate_data[i]["shadow"] == "no") {
+            // num_vampire = num_vampire + 1;
+            num_vampire++;
+          } else {
+            num_human++;
+          }
+        }
+        // Create the data table.
+        result_data.addColumn("string", "Element");
+        result_data.addColumn("number", "Count");
+        result_data.addRows([
+          ["Human", num_human],
+          ["Vampire", num_vampire],
+        ]);
+      }
 
       window.onload = function () {
-        var vampireInputsArray = JSON.parse(
-          localStorage.getItem("vampireInputsArray")
-        );
+        var classmate_data = [
+          {
+            name: "John",
+            shadow: "no",
+            galic: "no",
+            complexion: "pale",
+          },
+          {
+            name: "Lee",
+            shadow: "yes",
+            galic: "no",
+            complexion: "pale",
+          },
+          {
+            name: "Emma",
+            shadow: "no",
+            galic: "yes",
+            complexion: "brown",
+          },
+          {
+            name: "Ava",
+            shadow: "yes",
+            galic: "yes",
+            complexion: "olive ",
+          },
+          {
+            name: "Alex",
+            shadow: "no",
+            galic: "no",
+            complexion: "brown",
+          },
+        ];
+
+        var vampireInputsArray =
+          JSON.parse(localStorage.getItem("vampireInputsArray")) || [];
+
+        classmate_data = classmate_data.concat(vampireInputsArray);
+
+        var lastEntry = vampireInputsArray
+          ? vampireInputsArray[vampireInputsArray.length - 1]
+          : null;
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
@@ -296,10 +373,8 @@
         </button>
       </div>
 
-      <div class="form-group">
-        <p id="result"></p>
-        <p id="resultExplanation"></p>
-      </div>
+      <!--Div that will hold the pie chart-->
+      <div id="chart_div"></div>
 
       <!-- <div class="form-group">
             <button type="button" onclick="viewClassmates()">
