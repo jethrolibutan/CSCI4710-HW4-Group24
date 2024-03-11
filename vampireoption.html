@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function display_chosen_option(selectedValue) {
+            switch (selectedValue) {
+                case '1':
+                    var vampireInputs = JSON.parse(localStorage.getItem("vampireInputsArray"));
+                    if (vampireInputs && vampireInputs.length > 0) {
+                        var randomIndex = Math.floor(Math.random() * vampireInputs.length);
+                        var randomName = vampireInputs[randomIndex].name;
+                        console.log(randomName + " is a vampire.");
+                    } else {
+                        console.log("No data available to make a random guess.");
+                    }
+                    break;
+                case '2':
+                    var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
+                    var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
+                    var name = "";
+
+                    if (lastEntry) {
+                        name = lastEntry.name;
+                        
+                        var count = 0;
+                        if (lastEntry.shadow > 5) {
+                            count++;
+                        }
+                        if (lastEntry.garlic > 5) {
+                            count++;
+                        }
+                        if (lastEntry.pale > 5) {
+                            count++;
+                        }
+                        if (lastEntry.accent > 5) {
+                            count++;
+                        }
+
+                        if (count >= 3) {
+                            console.log(name + " is a vampire");
+                            console.log("The vampire detection algorithm has determined that " +
+                                name +
+                                " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.");
+                        } else {
+                            console.log(name + " is not a vampire");
+                            console.log("The vampire detection algorithm has determined that " +
+                                name +
+                                " is not a vampire based on the input provided... Your classmate did not meet three of the four requirements to becoming a vampire.");
+                        }
+                    } else {
+                        console.log("No data available");
+                    }
+                    break;
+                default:
+                    console.log("Invalid option selected.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h2>How would you like to tell if your classmate is a vampire?</h2>
+
+    <div class="form-group">
+        <label for="mySelect">Select Model Logic:</label>
+        <select class="form-control" id="mySelect">
+            <option value='1'>Random Guess</option>
+            <option value='2'>Threshold Based Method</option>
+        </select>   
+
+        <button type="button" onclick="display_chosen_option(document.getElementById('mySelect').value)">Display index</button>
+
+        <button type="button" onclick="document.getElementById('mySelect').selectedIndex = '-1'">Deselect all options.</button>    
+    </div>
+
+</div>
+
+
+</body>
+</html>
