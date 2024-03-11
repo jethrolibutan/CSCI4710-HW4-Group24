@@ -22,28 +22,23 @@
 
                     var isVampire = Math.random() < 0.5; // Here this code randomly guesses if the classmate is a vampire or not using the Math.Random() function.
 
+                    resultElement.textContent = "";
+                    resultExplanation.textContent = "";
+
                     if (isVampire) {
-                        $('#result').text(name + " is a vampire.");
-
                         resultElement.textContent = name + " is a vampire";
-                        resultExplanation.textContent =
-                            "The vampire detection algorithm has determined that " +
-                            name +
-                            " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
-
-
                     } else {
                         resultElement.textContent = name + " is not a vampire";
-                        resultExplanation.textContent =
-                            "The vampire detection algorithm has determined that " +
-                            name +
-                            " is not a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
                     }
                     break;
                 case '2':
                     var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
                     var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
+                    var resultElement = document.getElementById("result");
+                    var resultExplanation = document.getElementById("resultExplanation");
                     var name = "";
+
+                    name = lastEntry.name;
 
                     if (lastEntry) {
                         name = lastEntry.name;
@@ -63,22 +58,25 @@
                         }
 
                         if (count >= 3) {
-                            $('#result').text(name + " is a vampire");
-                            $('#result-details').text("The vampire detection algorithm has determined that " +
-                                name +
-                                " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.");
+                            resultElement.textContent = name + " is a vampire";
+                            resultExplanation.textContent =
+                            "The vampire detection algorithm has determined that " +
+                            name +
+                            " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";;
                         } else {
-                            $('#result').text(name + " is not a vampire");
-                            $('#result-details').text("The vampire detection algorithm has determined that " +
-                                name +
-                                " is not a vampire based on the input provided... Your classmate did not meet three of the four requirements to becoming a vampire.");
+                            resultElement.textContent = name + " is not a vampire";
+                            resultExplanation.textContent =
+                            "The vampire detection algorithm has determined that " +
+                            name +
+                            " is not a vampire based on the input provided. Your classmate did not meet three of the four requirements to becoming a vampire.";
                         }
                     } else {
-                        $('#result').text("No data available");
+                        resultElement.textContent = "No data available";
+                        resultExplanation.textContent = "No explanation available because there is no data available";
                     }
                     break;
                 default:
-                    $('#result').text("Invalid option selected.");
+                    $('#result').text("Invalid option selected! Please either chose Random Guess or Threshold Based Method.");
             }
         }
         
