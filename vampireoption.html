@@ -13,12 +13,31 @@
             switch (selectedValue) {
                 case '1':
                     var vampireInputs = JSON.parse(localStorage.getItem("vampireInputsArray"));
-                    if (vampireInputs && vampireInputs.length > 0) {
-                        var randomIndex = Math.floor(Math.random() * vampireInputs.length);
-                        var randomName = vampireInputs[randomIndex].name;
-                        console.log(randomName + " is a vampire.");
+                    var lastEntry = vampireInputs ? vampireInputs[vampireInputs.length - 1] : null;
+                    var resultElement = document.getElementById("result");
+                    var resultExplanation = document.getElementById("resultExplanation");
+                    var name = "";
+
+                    name = lastEntry.name;
+
+                    var isVampire = Math.random() < 0.5; // Here this code randomly guesses if the classmate is a vampire or not using the Math.Random() function.
+
+                    if (isVampire) {
+                        $('#result').text(name + " is a vampire.");
+
+                        resultElement.textContent = name + " is a vampire";
+                        resultExplanation.textContent =
+                            "The vampire detection algorithm has determined that " +
+                            name +
+                            " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
+
+
                     } else {
-                        console.log("No data available to make a random guess.");
+                        resultElement.textContent = name + " is not a vampire";
+                        resultExplanation.textContent =
+                            "The vampire detection algorithm has determined that " +
+                            name +
+                            " is not a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
                     }
                     break;
                 case '2':
@@ -44,23 +63,28 @@
                         }
 
                         if (count >= 3) {
-                            console.log(name + " is a vampire");
-                            console.log("The vampire detection algorithm has determined that " +
+                            $('#result').text(name + " is a vampire");
+                            $('#result-details').text("The vampire detection algorithm has determined that " +
                                 name +
                                 " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.");
                         } else {
-                            console.log(name + " is not a vampire");
-                            console.log("The vampire detection algorithm has determined that " +
+                            $('#result').text(name + " is not a vampire");
+                            $('#result-details').text("The vampire detection algorithm has determined that " +
                                 name +
                                 " is not a vampire based on the input provided... Your classmate did not meet three of the four requirements to becoming a vampire.");
                         }
                     } else {
-                        console.log("No data available");
+                        $('#result').text("No data available");
                     }
                     break;
                 default:
-                    console.log("Invalid option selected.");
+                    $('#result').text("Invalid option selected.");
             }
+        }
+        
+        function clearResult() {
+            $('#result').text("");
+            $('#resultExplanation').text("");
         }
     </script>
 </head>
@@ -78,7 +102,12 @@
 
         <button type="button" onclick="display_chosen_option(document.getElementById('mySelect').value)">Display index</button>
 
-        <button type="button" onclick="document.getElementById('mySelect').selectedIndex = '-1'">Deselect all options.</button>    
+        <button type="button" onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();">Deselect all options.</button>    
+    </div>
+
+    <div class="form-group">
+        <p id="result"></p>
+        <p id="resultExplanation"></p>
     </div>
 
 </div>
