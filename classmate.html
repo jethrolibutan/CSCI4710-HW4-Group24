@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
-        var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
+      var vampireInputsArray = JSON.parse(
+        localStorage.getItem("vampireInputsArray")
+      );
+      var lastEntry = vampireInputsArray
+        ? vampireInputsArray[vampireInputsArray.length - 1]
+        : null;
 
-        window.onload = function() {
-            var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
-            var tableBody = document.getElementById("userTableBody");
+      window.onload = function () {
+        var vampireInputsArray = JSON.parse(
+          localStorage.getItem("vampireInputsArray")
+        );
+        var tableBody = document.getElementById("userTableBody");
 
-            // Clear existing table rows
-            tableBody.innerHTML = "";
+        // Clear existing table rows
+        tableBody.innerHTML = "";
 
-            // Iterate through each user in the vampireInputsArray
-            vampireInputsArray.forEach(function(user) {
-                var row = document.createElement("tr");
+        // Iterate through each user in the vampireInputsArray
+        vampireInputsArray.forEach(function (user) {
+          var row = document.createElement("tr");
 
-                // Create table cells for each user property
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.name;
-                row.appendChild(nameCell);
+          // Create table cells for each user property
+          var nameCell = document.createElement("td");
+          nameCell.textContent = user.name;
+          row.appendChild(nameCell);
 
-                var shadowCell = document.createElement("td");
-                shadowCell.textContent = user.shadow;
-                row.appendChild(shadowCell);
+          var shadowCell = document.createElement("td");
+          shadowCell.textContent = user.shadow;
+          row.appendChild(shadowCell);
 
-                var garlicCell = document.createElement("td");
-                garlicCell.textContent = user.garlic;
-                row.appendChild(garlicCell);
+          var garlicCell = document.createElement("td");
+          garlicCell.textContent = user.garlic;
+          row.appendChild(garlicCell);
 
-                var paleCell = document.createElement("td");
-                paleCell.textContent = user.pale;
-                row.appendChild(paleCell);
+          var paleCell = document.createElement("td");
+          paleCell.textContent = user.pale;
+          row.appendChild(paleCell);
 
-                // Append the row to the table body
-                tableBody.appendChild(row);
-            });
-        };
+          // Append the row to the table body
+          tableBody.appendChild(row);
+        });
+      };
     </script>
-
-
-</head>
-<body>
-
-<div class="container">
-
-    <table class="table">
+  </head>
+  <body>
+    <div class="container">
+      <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Shadow</th>
-                <th>Garlic</th>
-                <th>Pale</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Shadow</th>
+            <th>Garlic</th>
+            <th>Pale</th>
+          </tr>
         </thead>
 
-        <h1> Here is all of your entered classmates! </h1>
+        <h1>Here is all of your entered classmates!</h1>
         <tbody id="userTableBody">
-            <!-- User data is dynamically added here! -->
+          <!-- User data is dynamically added here! -->
         </tbody>
-    </table>
+      </table>
 
-</div>
-
-
-</body>
+      <button onclick="window.location.href='vampireoption.html'">
+        Go Back One Page
+      </button>
+    </div>
+  </body>
 </html>

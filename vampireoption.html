@@ -1,177 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
-        var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
+      var vampireInputsArray = JSON.parse(
+        localStorage.getItem("vampireInputsArray")
+      );
+      var lastEntry = vampireInputsArray
+        ? vampireInputsArray[vampireInputsArray.length - 1]
+        : null;
 
-        window.onload = function() {
-            var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
-            var tableBody = document.getElementById("userTableBody");
+      window.onload = function () {
+        var vampireInputsArray = JSON.parse(
+          localStorage.getItem("vampireInputsArray")
+        );
+        var tableBody = document.getElementById("userTableBody");
 
-            // Clear existing table rows
-            tableBody.innerHTML = "";
+        // Clear existing table rows
+        tableBody.innerHTML = "";
 
-            var lastUser = vampireInputsArray[vampireInputsArray.length - 1];
+        var lastUser = vampireInputsArray[vampireInputsArray.length - 1];
 
-            var row = document.createElement("tr");
+        var row = document.createElement("tr");
 
-            // Create table cells for each user property
-            var nameCell = document.createElement("td");
-            nameCell.textContent = lastUser.name;
-            row.appendChild(nameCell);
+        // Create table cells for each user property
+        var nameCell = document.createElement("td");
+        nameCell.textContent = lastUser.name;
+        row.appendChild(nameCell);
 
-            var shadowCell = document.createElement("td");
-            shadowCell.textContent = lastUser.shadow;
-            row.appendChild(shadowCell);
+        var shadowCell = document.createElement("td");
+        shadowCell.textContent = lastUser.shadow;
+        row.appendChild(shadowCell);
 
-            var garlicCell = document.createElement("td");
-            garlicCell.textContent = lastUser.garlic;
-            row.appendChild(garlicCell);
+        var garlicCell = document.createElement("td");
+        garlicCell.textContent = lastUser.garlic;
+        row.appendChild(garlicCell);
 
-            var paleCell = document.createElement("td");
-            paleCell.textContent = lastUser.pale;
-            row.appendChild(paleCell);
+        var paleCell = document.createElement("td");
+        paleCell.textContent = lastUser.pale;
+        row.appendChild(paleCell);
 
-            // Append the row to the table body
-            tableBody.appendChild(row);
-        };
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      };
     </script>
 
     <script type="text/javascript">
-        function display_chosen_option(selectedValue) {
-            switch (selectedValue) {
-                case '1':
-                    var vampireInputs = JSON.parse(localStorage.getItem("vampireInputsArray"));
-                    var lastEntry = vampireInputs ? vampireInputs[vampireInputs.length - 1] : null;
-                    var resultElement = document.getElementById("result");
-                    var resultExplanation = document.getElementById("resultExplanation");
-                    var name = "";
+      function display_chosen_option(selectedValue) {
+        switch (selectedValue) {
+          case "1":
+            var vampireInputs = JSON.parse(
+              localStorage.getItem("vampireInputsArray")
+            );
+            var lastEntry = vampireInputs
+              ? vampireInputs[vampireInputs.length - 1]
+              : null;
+            var resultElement = document.getElementById("result");
+            var resultExplanation =
+              document.getElementById("resultExplanation");
+            var name = "";
 
-                    name = lastEntry.name;
+            name = lastEntry.name;
 
-                    var isVampire = Math.random() < 0.5; // Here this code randomly guesses if the classmate is a vampire or not using the Math.Random() function.
+            var isVampire = Math.random() < 0.5; // Here this code randomly guesses if the classmate is a vampire or not using the Math.Random() function.
 
-                    resultElement.textContent = "";
-                    resultExplanation.textContent = "";
+            resultElement.textContent = "";
+            resultExplanation.textContent = "";
 
-                    if (isVampire) {
-                        resultElement.textContent = name + " is a vampire";
-                    } else {
-                        resultElement.textContent = name + " is not a vampire";
-                    }
-                    break;
-                case '2':
-                    var vampireInputsArray = JSON.parse(localStorage.getItem("vampireInputsArray"));
-                    var lastEntry = vampireInputsArray ? vampireInputsArray[vampireInputsArray.length - 1] : null;
-                    var resultElement = document.getElementById("result");
-                    var resultExplanation = document.getElementById("resultExplanation");
-                    var name = "";
-
-                    name = lastEntry.name;
-
-                    if (lastEntry) {
-                        name = lastEntry.name;
-                        
-                        var count = 0;
-                        if (lastEntry.shadow === "false") {
-                            count += 4;
-                        }
-                        if (lastEntry.garlic === "true") {
-                            count += 3;
-                        }
-                        if (lastEntry.pale === "true") {
-                            count += 3;
-                        }
-
-                        if (count > 6) {
-                            resultElement.textContent = name + " is a vampire";
-                            resultExplanation.textContent =
-                            "The vampire detection algorithm has determined that " +
-                            name +
-                            " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
-                        } else if (count <= 6) {
-                            resultElement.textContent = name + " is not a vampire";
-                            resultExplanation.textContent =
-                            "The vampire detection algorithm has determined that " +
-                            name +
-                            " is not a vampire based on the input provided. Your classmate did not meet the threshold for becoming a vampire.";
-                        }
-                    } else {
-                        resultElement.textContent = "No data available";
-                        resultExplanation.textContent = "No explanation available because there is no data available";
-                    }
-                    break;
-                default:
-                    $('#result').text("Invalid option selected! Please either chose Random Guess or Threshold Based Method.");
+            if (isVampire) {
+              resultElement.textContent = name + " is a vampire";
+            } else {
+              resultElement.textContent = name + " is not a vampire";
             }
+            break;
+          case "2":
+            var vampireInputsArray = JSON.parse(
+              localStorage.getItem("vampireInputsArray")
+            );
+            var lastEntry = vampireInputsArray
+              ? vampireInputsArray[vampireInputsArray.length - 1]
+              : null;
+            var resultElement = document.getElementById("result");
+            var resultExplanation =
+              document.getElementById("resultExplanation");
+            var name = "";
+
+            name = lastEntry.name;
+
+            if (lastEntry) {
+              name = lastEntry.name;
+
+              var count = 0;
+              if (lastEntry.shadow === "false") {
+                count += 4;
+              }
+              if (lastEntry.garlic === "true") {
+                count += 3;
+              }
+              if (lastEntry.pale === "true") {
+                count += 3;
+              }
+
+              if (count > 6) {
+                resultElement.textContent = name + " is a vampire";
+                resultExplanation.textContent =
+                  "The vampire detection algorithm has determined that " +
+                  name +
+                  " is a vampire based on the input provided. Your classmate met three of the four requirements to becoming a vampire.";
+              } else if (count <= 6) {
+                resultElement.textContent = name + " is not a vampire";
+                resultExplanation.textContent =
+                  "The vampire detection algorithm has determined that " +
+                  name +
+                  " is not a vampire based on the input provided. Your classmate did not meet the threshold for becoming a vampire.";
+              }
+            } else {
+              resultElement.textContent = "No data available";
+              resultExplanation.textContent =
+                "No explanation available because there is no data available";
+            }
+            break;
+          default:
+            $("#result").text(
+              "Invalid option selected! Please either chose Random Guess or Threshold Based Method."
+            );
         }
-        
-        function clearResult() {
-            $('#result').text("");
-            $('#resultExplanation').text("");
-        }
-        
-        function viewClassmates() {
-            window.location.href = "classmate.html";
-        }
+      }
+
+      function clearResult() {
+        $("#result").text("");
+        $("#resultExplanation").text("");
+      }
+
+      function viewClassmates() {
+        window.location.href = "classmate.html";
+      }
     </script>
-</head>
-<body>
-
-<div class="container">
-
-    <table class="table">
+  </head>
+  <body>
+    <div class="container">
+      <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Shadow</th>
-                <th>Garlic</th>
-                <th>Pale</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Shadow</th>
+            <th>Garlic</th>
+            <th>Pale</th>
+          </tr>
         </thead>
 
-        <h1> Here is your most recently entered classmate down below: </h1>
+        <h1>Here is your most recently entered classmate down below:</h1>
         <tbody id="userTableBody">
-            <!-- User data is dynamically added here! -->
+          <!-- User data is dynamically added here! -->
         </tbody>
-    </table>
+      </table>
 
+      <h2>
+        How would you like to tell if your most recentlye entered classmate is a
+        vampire?
+      </h2>
+      <p>
+        Please note that this page will tell if your most recently added
+        classmate is a vampire or not.
+      </p>
 
-    <h2>How would you like to tell if your most recentlye entered classmate is a vampire?</h2>
-    <p> Please note that this page will tell if your most recently added classmate is a vampire or not.</p>
-
-    <div class="form-group">
+      <div class="form-group">
         <label for="mySelect">Select Model Logic:</label>
         <select class="form-control" id="mySelect">
-            <option value='1'>Random Guess</option>
-            <option value='2'>Threshold Based Method</option>
-        </select>   
+          <option value="1">Random Guess</option>
+          <option value="2">Threshold Based Method</option>
+        </select>
 
-        <button type="button" onclick="display_chosen_option(document.getElementById('mySelect').value)">Display index</button>
+        <button
+          type="button"
+          onclick="display_chosen_option(document.getElementById('mySelect').value)"
+        >
+          Display index
+        </button>
 
-        <button type="button" onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();">Deselect all options.</button>    
-    </div>
+        <button
+          type="button"
+          onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();"
+        >
+          Deselect all options.
+        </button>
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <p id="result"></p>
         <p id="resultExplanation"></p>
+      </div>
+
+      <div class="form-group">
+        <button type="button" onclick="viewClassmates()">
+          View Classmates
+        </button>
+      </div>
+
+      <button onclick="window.location.href='vampireinput.html'">
+        Go Back One Page
+      </button>
     </div>
-    
-    <div class="form-group">
-        <button type="button" onclick="viewClassmates()">View Classmates</button>
-    </div>
-
-
-</div>
-
-
-</body>
+  </body>
 </html>
