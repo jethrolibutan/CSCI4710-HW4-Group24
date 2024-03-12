@@ -397,41 +397,49 @@
           <option value="2">Threshold Based Method</option>
         </select>
 
-        <button
-          type="button"
-          onclick="display_chosen_option(document.getElementById('mySelect').value)"
-        >
-          Display index
-        </button>
+        <div class="display-option-group">
+          <button
+            type="button"
+            onclick="display_chosen_option(document.getElementById('mySelect').value)"
+          >
+            Display index
+          </button>
 
-        <button
-          type="button"
-          onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();"
-        >
-          Deselect all options.
-        </button>
+          <button
+            type="button"
+            onclick="document.getElementById('mySelect').selectedIndex = '-1'; clearResult();"
+          >
+            Deselect all options.
+          </button>
+        </div>
       </div>
 
       <!--Div that will hold the pie chart-->
       <div id="chart_div"></div>
 
-      <div class="view-classmates" id="classmatesDiv">
-        <p>
-          To view the "pie chart" visualization of your classmates being a
-          vampire or not click on this button ("View Classmates") below!
-        </p>
-        <button type="button" onclick="viewClassmates()">
-          View Classmates
-        </button>
+      <div class="view-classmates-row">
+        <div class="view-classmates" id="classmatesDiv">
+          <p>
+            To view the "pie chart" visualization of your classmates being a
+            vampire or not click on this button ("View Classmates") below!
+          </p>
+          <button
+            class="view-classmates-button"
+            type="button"
+            onclick="viewClassmates()"
+          >
+            View Classmates
+          </button>
+        </div>
       </div>
 
       <p>
-        Want to insert another classmate? Click on this button ("Go Back One
-        Page") below!
+        Want to insert another classmate? Click on this button ("Go Enter New
+        Classmate") below!
       </p>
 
       <button onclick="window.location.href='vampireinput.html'">
-        Go Back One Page
+        Go Enter New Classmate
       </button>
     </div>
   </body>
