@@ -4,6 +4,7 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./vampireoption.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
@@ -128,6 +129,8 @@
 
     <script type="text/javascript">
       function display_chosen_option(selectedValue) {
+        var classmatesDiv = document.getElementById("classmatesDiv");
+        classmatesDiv.style.display = "block";
         switch (selectedValue) {
           case "1":
             var vampireInputsArray = JSON.parse(
@@ -412,7 +415,7 @@
       <!--Div that will hold the pie chart-->
       <div id="chart_div"></div>
 
-      <div class="form-group">
+      <div class="view-classmates" id="classmatesDiv">
         <p>
           To view the "pie chart" visualization of your classmates being a
           vampire or not click on this button ("View Classmates") below!
