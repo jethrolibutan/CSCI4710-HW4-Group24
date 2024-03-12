@@ -286,7 +286,11 @@
                 count += 3;
               }
 
-              user.isAVampire = count > 6 ? "true" : "false";
+              if (count <= 6) {
+                user.isAVampire = "false";
+              } else if (count > 6) {
+                user.isAVampire = "true";
+              }
 
               var nameCell = document.createElement("td");
               nameCell.textContent = user.name;
