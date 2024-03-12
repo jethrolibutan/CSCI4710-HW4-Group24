@@ -23,9 +23,17 @@ input[type="reset"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
+  margin: auto;
 }
 
 .submit-reset input {
   margin: 0 1em;
+}
+
+.go-back-one-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2em;
 }

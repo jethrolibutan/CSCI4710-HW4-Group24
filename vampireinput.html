@@ -123,16 +123,20 @@
           placeholder="Enter a complexion"
         /><br /><br />
 
-        <div class="submit-reset"></div>
-        <input type="submit" value="Submit" />
-        <input
-          type="reset"
-          value="Reset"
-          onclick="document.querySelector('form').reset();"
-        />
+        <div class="submit-reset">
+          <input type="submit" value="Submit" />
+          <input
+            type="reset"
+            value="Reset"
+            onclick="document.querySelector('form').reset();"
+          />
+        </div>
       </form>
 
-      <button onclick="window.location.href='home.html'">
+      <button
+        class="go-back-one-page"
+        onclick="window.location.href='home.html'"
+      >
         Go Back One Page
       </button>
     </div>
