@@ -55,51 +55,6 @@
         },
       ];
 
-      // Drawing the chart
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = new google.visualization.DataTable();
-
-        classmate_data_processing(data);
-
-        // Set chart options
-        var options = {
-          title: "How many vampires in the class?",
-          width: 400,
-          height: 300,
-        };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(
-          document.getElementById("chart_div")
-        );
-        chart.draw(data, options);
-      }
-
-      function classmate_data_processing(result_data) {
-        // this function process classmate data and create data table
-        var num_human = 0;
-        var num_vampire = 0;
-        for (var i = 0; i <= classmate_data.length - 1; i++) {
-          // logic based on shadow
-          if (classmate_data[i]["shadow"] == "no") {
-            // num_vampire = num_vampire + 1;
-            num_vampire++;
-          } else {
-            num_human++;
-          }
-        }
-        // Create the data table.
-        result_data.addColumn("string", "Element");
-        result_data.addColumn("number", "Count");
-        result_data.addRows([
-          ["Human", num_human],
-          ["Vampire", num_vampire],
-        ]);
-      }
-
       window.onload = function () {
         var vampireInputsArray = JSON.parse(
           localStorage.getItem("vampireInputsArray")
