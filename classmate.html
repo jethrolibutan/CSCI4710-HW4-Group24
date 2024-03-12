@@ -92,6 +92,11 @@
           ]);
         }
       }
+
+      function goBack() {
+        // Navigate to the page "vampireoption.html"
+        window.location.href = "vampireoption.html";
+      }
     </script>
   </head>
   <body>
@@ -99,9 +104,7 @@
       <!--Div that will hold the pie chart-->
       <div id="chart_div"></div>
 
-      <button onclick="window.location.href='vampireoption.html'">
-        Go Back One Page
-      </button>
+      <button onclick="goBack()">Go Back One Page</button>
     </div>
   </body>
 </html>
