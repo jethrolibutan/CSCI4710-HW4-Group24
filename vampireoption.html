@@ -101,17 +101,15 @@
           localStorage.getItem("vampireInputsArray")
         );
 
-        updatedClassmateData = classmate_data.concat(vampireInputsArray);
-
         console.log(vampireInputsArray);
-        console.log(updatedClassmateData);
+        console.log(vampireInputsArray.length);
 
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        updatedClassmateData.forEach(function (user) {
+        classmate_data.forEach(function (user) {
           var row = document.createElement("tr");
 
           var nameCell = document.createElement("td");
@@ -133,9 +131,35 @@
           tableBody.appendChild(row);
         });
 
+        vampireInputsArray.forEach(function (user) {
+          var row = document.createElement("tr");
+
+          var nameCell = document.createElement("td");
+          nameCell.textContent = user.name;
+          row.appendChild(nameCell);
+
+          var shadowCell = document.createElement("td");
+          shadowCell.textContent = user.shadow;
+          row.appendChild(shadowCell);
+
+          var garlicCell = document.createElement("td");
+          garlicCell.textContent = user.garlic;
+          row.appendChild(garlicCell);
+
+          var paleCell = document.createElement("td");
+          paleCell.textContent = user.pale;
+          row.appendChild(paleCell);
+
+          var vampireCell = document.createElement("td");
+          vampireCell.textContent = user.isAVampire;
+          row.appendChild(vampireCell);
+
+          tableBody.appendChild(row);
+        });
+
         localStorage.setItem(
           "vampireInputsArray",
-          JSON.stringify(updatedClassmateData)
+          JSON.stringify(vampireInputsArray)
         );
 
         var tableBody = document.getElementById("userTableBody");
