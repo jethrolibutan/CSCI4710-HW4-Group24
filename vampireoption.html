@@ -23,30 +23,35 @@
           shadow: "no",
           garlic: "no",
           pale: "pale",
+          isAVampire: "not yet determined",
         },
         {
           name: "Lee",
           shadow: "yes",
           garlic: "no",
           pale: "pale",
+          isAVampire: "not yet determined",
         },
         {
           name: "Emma",
           shadow: "no",
           garlic: "yes",
           pale: "brown",
+          isAVampire: "not yet determined",
         },
         {
           name: "Ava",
           shadow: "yes",
           garlic: "yes",
           pale: "olive ",
+          isAVampire: "not yet determined",
         },
         {
           name: "Alex",
           shadow: "no",
           garlic: "no",
           pale: "brown",
+          isAVampire: "not yet determined",
         },
       ];
 
@@ -125,6 +130,10 @@
           paleCell.textContent = user.pale;
           row.appendChild(paleCell);
 
+          var vampireCell = document.createElement("td");
+          vampireCell.textContent = user.isAVampire;
+          row.appendChild(vampireCell);
+
           tableBody.appendChild(row);
         });
 
@@ -148,7 +157,7 @@
           row.appendChild(paleCell);
 
           var vampireCell = document.createElement("td");
-          vampireCell.textContent = user.isAVampire;
+          vampireCell.textContent = "not yet determined";
           row.appendChild(vampireCell);
 
           tableBody.appendChild(row);
@@ -177,30 +186,35 @@
                 shadow: "no",
                 garlic: "no",
                 pale: "pale",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Lee",
                 shadow: "yes",
                 garlic: "no",
                 pale: "pale",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Emma",
                 shadow: "no",
                 garlic: "yes",
                 pale: "brown",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Ava",
                 shadow: "yes",
                 garlic: "yes",
                 pale: "olive ",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Alex",
                 shadow: "no",
                 garlic: "no",
                 pale: "brown",
+                isAVampire: "not yet determined",
               },
             ];
 
@@ -245,14 +259,21 @@
                 "vampireInputsArray",
                 JSON.stringify(vampireInputsArray)
               );
+
+              // Set the updated classmate data in local storage
+              localStorage.setItem(
+                "classmateData",
+                JSON.stringify(classmate_data)
+              );
             });
 
             break;
           // Other cases
 
           case "2":
-            // Clear existing data in local storage
-            localStorage.removeItem("vampireInputsArray");
+            var vampireInputsArray = JSON.parse(
+              localStorage.getItem("vampireInputsArray")
+            );
 
             var classmate_data = [
               {
@@ -260,36 +281,37 @@
                 shadow: "no",
                 garlic: "no",
                 pale: "pale",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Lee",
                 shadow: "yes",
                 garlic: "no",
                 pale: "pale",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Emma",
                 shadow: "no",
                 garlic: "yes",
                 pale: "brown",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Ava",
                 shadow: "yes",
                 garlic: "yes",
                 pale: "olive",
+                isAVampire: "not yet determined",
               },
               {
                 name: "Alex",
                 shadow: "no",
                 garlic: "no",
                 pale: "brown",
+                isAVampire: "not yet determined",
               },
             ];
-
-            var vampireInputsArray = JSON.parse(
-              localStorage.getItem("vampireInputsArray")
-            );
 
             var newClassmateData = classmate_data.concat(vampireInputsArray);
 
@@ -339,7 +361,13 @@
               // Set the updated vampireInputsArray in local storage
               localStorage.setItem(
                 "vampireInputsArray",
-                JSON.stringify(newClassmateData)
+                JSON.stringify(vampireInputsArray)
+              );
+
+              // Set the updated classmate data in local storage
+              localStorage.setItem(
+                "classmateData",
+                JSON.stringify(classmate_data)
               );
             });
 
