@@ -57,20 +57,40 @@
         var trueCount = 0;
         var falseCount = 0;
 
-        classmate_data.forEach(function (classmate) {
-          if (classmate.isAVampire) {
-            trueCount++;
-          } else {
-            falseCount++;
-          }
-        });
-        // Create the data table.
-        result_data.addColumn("string", "Element");
-        result_data.addColumn("number", "Count");
-        result_data.addRows([
-          ["Human", falseCount],
-          ["Vampire", trueCount],
-        ]);
+        var methodOfSorting = JSON.parse(localStorage.getItem("method"));
+
+        console.log("This is the method of sorting", methodOfSorting);
+
+        if (methodOfSorting.method === "Random Guess") {
+          classmate_data.forEach(function (classmate) {
+            if (classmate.isAVampire) {
+              trueCount++;
+            } else {
+              falseCount++;
+            }
+          });
+          // Create the data table.
+          result_data.addColumn("string", "Element");
+          result_data.addColumn("number", "Count");
+          result_data.addRows([
+            ["Human", falseCount],
+            ["Vampire", trueCount],
+          ]);
+        } else if (methodOfSorting.method === "Threshold Based") {
+          classmate_data.forEach(function (classmate) {
+            if (classmate.isAVampire === "true") {
+              trueCount++;
+            } else {
+              falseCount++;
+            }
+          });
+          result_data.addColumn("string", "Element");
+          result_data.addColumn("number", "Count");
+          result_data.addRows([
+            ["Human", falseCount],
+            ["Vampire", trueCount],
+          ]);
+        }
       }
     </script>
   </head>

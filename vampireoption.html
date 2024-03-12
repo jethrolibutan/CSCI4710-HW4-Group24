@@ -214,11 +214,18 @@
                 JSON.stringify(vampireInputsArray)
               );
 
-              // Set the updated classmate data in local storage
               localStorage.setItem(
                 "classmateData",
                 JSON.stringify(classmate_data)
               );
+
+              var methodData = {
+                method: "Random Guess",
+              };
+
+              var jsonData = JSON.stringify(methodData);
+
+              localStorage.setItem("method", jsonData);
             });
 
             break;
@@ -325,6 +332,14 @@
                 "classmateData",
                 JSON.stringify(classmate_data)
               );
+
+              var thresholdMethod = {
+                method: "Threshold Based",
+              };
+
+              var thresholdJsonData = JSON.stringify(thresholdMethod);
+
+              localStorage.setItem("method", thresholdJsonData);
             });
 
             break;
