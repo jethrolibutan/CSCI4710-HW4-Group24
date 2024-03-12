@@ -56,7 +56,6 @@
       ];
 
       // Drawing the chart
-
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
 
@@ -399,7 +398,7 @@
             <th>Name</th>
             <th>Shadow</th>
             <th>Garlic</th>
-            <th>Pale</th>
+            <th>Complexion?</th>
             <th>Is A Vampire?</th>
           </tr>
         </thead>
@@ -441,15 +440,24 @@
       <!--Div that will hold the pie chart-->
       <div id="chart_div"></div>
 
-      <!-- <div class="form-group">
-            <button type="button" onclick="viewClassmates()">
-                View Classmates
-            </button>
-        </div>
+      <div class="form-group">
+        <p>
+          To view the "pie chart" visualization of your classmates being a
+          vampire or not click on this button ("View Classmates") below!
+        </p>
+        <button type="button" onclick="viewClassmates()">
+          View Classmates
+        </button>
+      </div>
 
-        <button onclick="window.location.href='vampireinput.html'">
-            Go Back One Page
-        </button> -->
+      <p>
+        Want to insert another classmate? Click on this button ("Go Back One
+        Page") below!
+      </p>
+
+      <button onclick="window.location.href='vampireinput.html'">
+        Go Back One Page
+      </button>
     </div>
   </body>
 </html>
