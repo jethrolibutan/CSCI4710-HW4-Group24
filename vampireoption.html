@@ -101,9 +101,6 @@
           localStorage.getItem("vampireInputsArray")
         );
 
-        console.log(vampireInputsArray);
-        console.log(vampireInputsArray.length);
-
         var tableBody = document.getElementById("userTableBody");
 
         // Clearing existing table rows
@@ -170,6 +167,10 @@
       function display_chosen_option(selectedValue) {
         switch (selectedValue) {
           case "1":
+            var vampireInputsArray = JSON.parse(
+              localStorage.getItem("vampireInputsArray")
+            );
+
             var classmate_data = [
               {
                 name: "John",
@@ -242,7 +243,7 @@
               // Set the updated vampireInputsArray in local storage
               localStorage.setItem(
                 "vampireInputsArray",
-                JSON.stringify(newClassmateData)
+                JSON.stringify(vampireInputsArray)
               );
             });
 
