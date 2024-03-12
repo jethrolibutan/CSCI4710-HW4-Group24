@@ -10,29 +10,109 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
 
     <script type="text/javascript">
-      var vampireInputsArray = JSON.parse(
-        localStorage.getItem("vampireInputsArray")
-      );
-      var lastEntry = vampireInputsArray
-        ? vampireInputsArray[vampireInputsArray.length - 1]
-        : null;
+      // array of json objects
+      var classmate_data = [
+        {
+          name: "John",
+          shadow: "no",
+          garlic: "no",
+          pale: "pale",
+          isAVampire: "not yet determined",
+        },
+        {
+          name: "Lee",
+          shadow: "yes",
+          garlic: "no",
+          pale: "pale",
+          isAVampire: "not yet determined",
+        },
+        {
+          name: "Emma",
+          shadow: "no",
+          garlic: "yes",
+          pale: "brown",
+          isAVampire: "not yet determined",
+        },
+        {
+          name: "Ava",
+          shadow: "yes",
+          garlic: "yes",
+          pale: "olive ",
+          isAVampire: "not yet determined",
+        },
+        {
+          name: "Alex",
+          shadow: "no",
+          garlic: "no",
+          pale: "brown",
+          isAVampire: "not yet determined",
+        },
+      ];
+
+      // Drawing the chart
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+
+        classmate_data_processing(data);
+
+        // Set chart options
+        var options = {
+          title: "How many vampires in the class?",
+          width: 400,
+          height: 300,
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(
+          document.getElementById("chart_div")
+        );
+        chart.draw(data, options);
+      }
+
+      function classmate_data_processing(result_data) {
+        // this function process classmate data and create data table
+        var num_human = 0;
+        var num_vampire = 0;
+        for (var i = 0; i <= classmate_data.length - 1; i++) {
+          // logic based on shadow
+          if (classmate_data[i]["shadow"] == "no") {
+            // num_vampire = num_vampire + 1;
+            num_vampire++;
+          } else {
+            num_human++;
+          }
+        }
+        // Create the data table.
+        result_data.addColumn("string", "Element");
+        result_data.addColumn("number", "Count");
+        result_data.addRows([
+          ["Human", num_human],
+          ["Vampire", num_vampire],
+        ]);
+      }
 
       window.onload = function () {
         var vampireInputsArray = JSON.parse(
           localStorage.getItem("vampireInputsArray")
         );
+
         var tableBody = document.getElementById("userTableBody");
 
-        // Clear existing table rows
+        // Clearing existing table rows
         tableBody.innerHTML = "";
 
-        // Iterate through each user in the vampireInputsArray
-        vampireInputsArray.forEach(function (user) {
+        classmate_data.forEach(function (user) {
           var row = document.createElement("tr");
 
-          // Create table cells for each user property
           var nameCell = document.createElement("td");
           nameCell.textContent = user.name;
           row.appendChild(nameCell);
@@ -49,29 +129,52 @@
           paleCell.textContent = user.pale;
           row.appendChild(paleCell);
 
-          // Append the row to the table body
+          var vampireCell = document.createElement("td");
+          vampireCell.textContent = user.isAVampire;
+          row.appendChild(vampireCell);
+
           tableBody.appendChild(row);
         });
+
+        vampireInputsArray.forEach(function (user) {
+          var row = document.createElement("tr");
+
+          var nameCell = document.createElement("td");
+          nameCell.textContent = user.name;
+          row.appendChild(nameCell);
+
+          var shadowCell = document.createElement("td");
+          shadowCell.textContent = user.shadow;
+          row.appendChild(shadowCell);
+
+          var garlicCell = document.createElement("td");
+          garlicCell.textContent = user.garlic;
+          row.appendChild(garlicCell);
+
+          var paleCell = document.createElement("td");
+          paleCell.textContent = user.pale;
+          row.appendChild(paleCell);
+
+          var vampireCell = document.createElement("td");
+          vampireCell.textContent = "not yet determined";
+          row.appendChild(vampireCell);
+
+          tableBody.appendChild(row);
+        });
+
+        localStorage.setItem(
+          "vampireInputsArray",
+          JSON.stringify(vampireInputsArray)
+        );
+
+        var tableBody = document.getElementById("userTableBody");
       };
     </script>
   </head>
   <body>
     <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Shadow</th>
-            <th>Garlic</th>
-            <th>Pale</th>
-          </tr>
-        </thead>
-
-        <h1>Here is all of your entered classmates!</h1>
-        <tbody id="userTableBody">
-          <!-- User data is dynamically added here! -->
-        </tbody>
-      </table>
+      <!--Div that will hold the pie chart-->
+      <div id="chart_div"></div>
 
       <button onclick="window.location.href='vampireoption.html'">
         Go Back One Page
